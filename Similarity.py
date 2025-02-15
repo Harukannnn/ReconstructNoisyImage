@@ -1,4 +1,5 @@
 import numpy as np
+import pickle
 import sklearn as skl
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -104,6 +105,49 @@ if similarity_method == "cosine":
 
     plt.tight_layout()
     plt.show()
+
+model_params = {
+    "weights": weights,
+    "biases": biases,
+    "W": W,
+    "b": b
+}
+with open("cnn_model.pkl", "wb") as f:
+    pickle.dump(model_params, f)
+
+print("模型已保存到 cnn_model.pkl")
+
+# with open("cnn_model.pkl", "rb") as f:
+#     loaded_model = pickle.load(f)
+#
+# weights = loaded_model["weights"]
+# biases = loaded_model["biases"]
+# W = loaded_model["W"]
+# b = loaded_model["b"]
+#
+# print("模型已加载成功")
+#
+# def predict(X):
+#     test_features = extract_features(X, batch_size=32)
+#     similarities = cosine_similarity(test_features, train_features)
+#     predictions = y_train[np.argmax(similarities, axis=1)]
+#     return predictions
+#
+# predictions = predict(X_test)
+# accuracy = np.mean(np.argmax(predictions, axis=1) == np.argmax(y_test, axis=1))
+# print(f"测试集分类准确率: {accuracy:.4f}")
+#
+# plt.figure(figsize=(10, 10))
+# num_images = 16
+# for i in range(num_images):
+#     plt.subplot(4, 4, i + 1)
+#     plt.imshow(X_test[i].reshape(28, 28), cmap='gray')
+#     plt.title(f"Pred: {np.argmax(predictions[i])} / True: {np.argmax(y_test[i])}")
+#     plt.axis('off')
+#
+# plt.tight_layout()
+# plt.show()
+
 
 # similarity_method = "KMeans"
 # if similarity_method == "KMeans":
